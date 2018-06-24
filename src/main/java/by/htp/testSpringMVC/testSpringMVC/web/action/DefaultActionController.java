@@ -12,16 +12,16 @@ import by.htp.testSpringMVC.testSpringMVC.dao.hbn.UserDaoHibernateImpl;
 import by.htp.testSpringMVC.testSpringMVC.domain.User;
 
 
-@Controller
-@RequestMapping(value = "/")
+//@Controller
+//@RequestMapping(value = "/////")  //"/"
 public class DefaultActionController {
 
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	//@RequestMapping(value = "///login/", method = RequestMethod.GET)
 	public ModelAndView common() {
-		return new ModelAndView("loginJSP", "userJSP", new User());
+		return new ModelAndView("login", "userJSP", new User());
 	}
 	  
-	@RequestMapping(value = "check-user", method = RequestMethod.POST)
+	//@RequestMapping(value = "check-user", method = RequestMethod.POST)
 	public ModelAndView checkUser (@ModelAttribute("userJSP") User user) {
 		ModelAndView mav=new ModelAndView();
 		

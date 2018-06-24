@@ -28,8 +28,11 @@
    			
    		</script>
    		
-<h2>${message_admin}</h2>
-abcd
+	<h2>${message_admin}</h2>
+	
+	
+	<a href="<c:url value="/logout"/>">Logout</a>
+	
  <div id="resultValue"></div>
  
 	<c:forEach items="${users}" var="user">
@@ -48,6 +51,9 @@ abcd
 			</fieldset>
 	
 	 <input type = "submit" value = "Изменить"/>
+	 
+	 
+	 
 		</form:form>
 	</c:forEach>
 </body>

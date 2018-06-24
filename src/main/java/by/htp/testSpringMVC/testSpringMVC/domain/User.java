@@ -34,6 +34,16 @@ public class User implements Serializable{
 		
 		}		
 		
+		
+
+		public User(String name, String pass) {
+			super();
+			this.name = name;
+			this.pass = pass;
+		}
+
+
+
 		public int getId() {
 			return id;
 		}

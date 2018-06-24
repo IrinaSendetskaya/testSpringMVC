@@ -5,11 +5,11 @@
 <!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin page</title>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-      
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Admin page</title>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+	      
 </head>
 <body>
 
@@ -52,6 +52,8 @@
 	     <form>
 	     	<input type="text" id="pass" onkeyup="doAjax()"/>
 	     	<input type="text" id="login" onkeyup="doAjax2()"/>			
+	     	
+	     	<a href="j_spring_security_Logout">Logout</a>
 		</form>
 	
 </body>

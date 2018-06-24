@@ -15,28 +15,28 @@ import org.springframework.web.servlet.ModelAndView;
 import by.htp.testSpringMVC.testSpringMVC.dao.hbn.UserDaoHibernateImpl;
 import by.htp.testSpringMVC.testSpringMVC.domain.User;
 
-@Controller
-@RequestMapping(value = "/")
+//@Controller
+//@RequestMapping(value = "///")    //@RequestMapping(value = "/")
 public class RegistrationController {
 	
 	boolean flag=true;
 	
-	@Autowired
-	@Qualifier(value="daoImpl")
-	private UserDaoHibernateImpl userDaoImpl;   //тут д/б/ ссылки на сервисы!!
+//	@Autowired
+//	@Qualifier(value="daoImpl")
+//	private UserDaoHibernateImpl userDaoImpl;   //тут д/б/ ссылки на сервисы!!
 
-	@RequestMapping(value = "newUser", method = RequestMethod.GET)
+//	@RequestMapping(value = "newUser", method = RequestMethod.GET)
 	public ModelAndView newUser() {
 		return new ModelAndView("registrationJSP", "userJSP", new User());
 	}
 	
-	@RequestMapping(value = "checkPass", method = RequestMethod.GET)
+//	@RequestMapping(value = "checkPass", method = RequestMethod.GET)
 	public @ResponseBody
 	String checkPass(@RequestParam String pass) {
 		return "Good Password";
 	}
 	
-	@RequestMapping(value = "checkLogin", method = RequestMethod.GET)
+	//@RequestMapping(value = "checkLogin", method = RequestMethod.GET)
 	public @ResponseBody
 	String checkLogin (@ModelAttribute("userJSP") User user) {
 		
@@ -53,7 +53,7 @@ public class RegistrationController {
 		
 	}
 	
-	@RequestMapping(value = "signup", method = RequestMethod.GET)
+	//@RequestMapping(value = "signup", method = RequestMethod.GET)
 	public @ResponseBody
 	String signup(@ModelAttribute("userJSP") User user) {
 		if(flag) {

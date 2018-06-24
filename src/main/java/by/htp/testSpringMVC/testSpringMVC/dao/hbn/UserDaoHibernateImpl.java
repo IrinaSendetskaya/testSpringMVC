@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import by.htp.testSpringMVC.testSpringMVC.dao.UserDao;
 import by.htp.testSpringMVC.testSpringMVC.domain.User;
 
-@Component(value="daoImpl")
+
 public class UserDaoHibernateImpl implements UserDao {
 
 	@Override

@@ -23,7 +23,7 @@
   </bean>
    -->
    
-   <context:component-scan base-package = "by.htp.testSpringMVC.testSpringMVC" />
+   <!--  <context:component-scan base-package = "by.htp.testSpringMVC.testSpringMVC" />-->
  <!--   
   <bean class="by.htp.testSpringMVC.testSpringMVC.dao.hbn.UserDaoHibernateImpl" name="userDaoImpl">
   

@@ -18,4 +18,4 @@
 			<column name="pass"></column>
 		</property>
 	</class>
-</hibernate-mapping>
+</hibernate-mapping> 
