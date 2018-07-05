@@ -6,7 +6,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Component;
 
 import by.htp.testSpringMVC.testSpringMVC.dao.UserDao;
 import by.htp.testSpringMVC.testSpringMVC.domain.User;

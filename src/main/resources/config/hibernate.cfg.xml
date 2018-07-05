@@ -27,6 +27,8 @@
 		
 		<!-- <mapping resource="hbm/user.hbm.xml" /> -->
 		<mapping class="by.htp.testSpringMVC.testSpringMVC.domain.User" />
+		<mapping class="by.htp.testSpringMVC.testSpringMVC.domain.Car" />
+		<mapping class="by.htp.testSpringMVC.testSpringMVC.domain.Order" />
 		
 	</session-factory>
 

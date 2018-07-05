@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -19,18 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import by.htp.testSpringMVC.testSpringMVC.dao.UserDao;
-import by.htp.testSpringMVC.testSpringMVC.dao.hbn.UserDaoHibernateImpl;
-import by.htp.testSpringMVC.testSpringMVC.domain.User;
 import by.htp.testSpringMVC.testSpringMVC.service.UserService;
-import by.htp.testSpringMVC.testSpringMVC.service.impl.UserServiceImpl;
 
-@Controller
-@RequestMapping(value="/users")
+//@Controller
+//@RequestMapping(value="/users")
 public class UserController {
 	
-	@Autowired
-	private UserService userService;
+//	@Autowired
+//	private UserService userService;
 	//@Qualifier(value="daoImpl")
 	//private UserDao userDaoImpl; 
 	
@@ -50,18 +45,18 @@ public class UserController {
 */
 
 
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-
-	public UserController(UserService userService) {
-		super();
-		this.userService = userService;
-	}
+//	public UserService getUserService() {
+//		return userService;
+//	}
+//
+//	public void setUserService(UserService userService) {
+//		this.userService = userService;
+//	}
+//
+//	public UserController(UserService userService) {
+//		super();
+//		this.userService = userService;
+//	}
 
 	
 
@@ -111,14 +106,14 @@ public class UserController {
 	      return "login";
 	   }
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<String> listUser() {
-		//UserDao userDao
-		List<String> users= userService.getUsers();
-		return users;
-	}
+	//@RequestMapping(method = RequestMethod.GET)
+//	public List<String> listUser() {
+//		//UserDao userDao
+//		List<String> users= userService.getUsers();
+//		return users;
+//	}
 	
-	@RequestMapping(value = "/exeption",method = RequestMethod.GET)
+	//@RequestMapping(value = "/exeption",method = RequestMethod.GET)
 	public void getException() {
 		
 		

@@ -1,30 +1,43 @@
 package by.htp.testSpringMVC.testSpringMVC.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import by.htp.testSpringMVC.testSpringMVC.dao.CarDao;
+import by.htp.testSpringMVC.testSpringMVC.dao.impl.CarDaoImpl;
 import by.htp.testSpringMVC.testSpringMVC.domain.Car;
 import by.htp.testSpringMVC.testSpringMVC.service.CarService;
 
 
-@Component
+
 public class CarServiceImpl implements CarService {
 
+	@Autowired
+	private CarDaoImpl carDao;
+	
 	@Override
 	public List<Car> getCars() {
-		List<Car> cars = new ArrayList<>();
-		cars.add(new Car("BMW"));
-		cars.add(new Car("VW"));
-		cars.add(new Car("Audi"));
 		
-		return cars;
+		return carDao.readAll();
 	}
 	
 	public int getCarCount() {
+		//int count=(int)carRepository.count();
 		int count=getCars().size();
 		return count;
 	}
+	
+//	@Override
+//	public List<Car> findCarByNameAndDate(String name, String date) {
+////	    return carRepository.findCarByNameAndDate(name, date);
+//		return carRepository.;
+//	}
+//	
+//	@Override
+//	public List<Car> mostPopularCarInDates(String dateOne, String dateTwo){
+//		return carRepository.mostPopularCarInDates(dateOne, dateTwo);
+//	}
 
 }
