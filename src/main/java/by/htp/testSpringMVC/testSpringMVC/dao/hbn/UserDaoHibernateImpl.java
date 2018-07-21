@@ -6,12 +6,16 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Component;
 
 import by.htp.testSpringMVC.testSpringMVC.dao.UserDao;
 import by.htp.testSpringMVC.testSpringMVC.domain.User;
-
-
+@Component
 public class UserDaoHibernateImpl implements UserDao {
+	
+	public UserDaoHibernateImpl() {
+		super();
+	}
 
 	@Override
 	public void create(User entity) {
@@ -35,6 +39,17 @@ public class UserDaoHibernateImpl implements UserDao {
 //		Transaction tr = session.beginTransaction();
 //		Car car = (Car) session.load(Car.class, id);
 //		tr.commit();
+		session.close();
+		return car;
+		
+	}
+	
+	public User read(String name, String pass) {
+		Session session=SessionFactoryManager.getSessionFactory().openSession();
+		Criteria criteria=session.createCriteria(User.class);       
+		criteria.add(Restrictions.eq("name", name));
+		criteria.add(Restrictions.eq("pass", pass));
+		User car=(User) criteria.list().get(0);
 		session.close();
 		return car;
 		
@@ -64,6 +79,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> readAll() {
 		Session session=SessionFactoryManager.getSessionFactory().openSession();
@@ -72,5 +88,6 @@ public class UserDaoHibernateImpl implements UserDao {
 		session.close();
 		return listCar;
 	}
+
 
 }

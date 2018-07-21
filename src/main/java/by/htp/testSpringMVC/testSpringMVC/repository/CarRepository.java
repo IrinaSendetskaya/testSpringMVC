@@ -1,11 +1,6 @@
 package by.htp.testSpringMVC.testSpringMVC.repository;
 
-
-import java.util.List;
-
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import by.htp.testSpringMVC.testSpringMVC.domain.Car;

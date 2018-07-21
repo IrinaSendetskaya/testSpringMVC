@@ -1,26 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="include/begin-html.jsp"%>
+<%-- <%@ include file="views/include/begin-html.jsp"%> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+<jsp:forward page="/main" /> 
 
-
-hello!!!
-<%-- <div class="container">
-	    <h1>This is secured!</h1>
-	    <p>
-	      Hello <b><c:out value="${pageContext.request.remoteUser}"/></b>
-	    </p>
-	    <c:url var="logoutUrl" value="/logout"/>
-	    <form class="form-inline" action="${logoutUrl}" method="post">
-	      <input type="submit" value="Log out" />
-	      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	    </form>
-	  </div> --%>
+<%-- hello!!!
 	  
-	  <c:url var="indexURL" value="/">  </c:url>
+	  <c:url var="indexURL" value="/main">  </c:url>
 
 <div class="page-header">
 	<h1>Все товары</h1>
@@ -59,12 +48,12 @@ hello!!!
 
 				</div>
 
-				<%-- <c:if test="${buyer.fk_roles!=3}"> --%>
+				<c:if test="${buyer.fk_roles!=3}">
 					<div class="col-md-1">
 						<button id="Update" value="Update" name="Update"
 							class="btn btn-success">В корзину</button>
 					</div>
-				<%-- </c:if> --%>
+				</c:if>
 			</div>
 
 		</form>
@@ -77,4 +66,4 @@ hello!!!
 
 
 
-<%@ include file="include/end-html.jsp"%>
+<%@ include file="views/include/end-html.jsp"%> --%>

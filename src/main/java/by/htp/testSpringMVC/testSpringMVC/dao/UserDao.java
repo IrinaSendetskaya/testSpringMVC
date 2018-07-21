@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import by.htp.testSpringMVC.testSpringMVC.domain.User;
 
-//@Component
+@Component
 public interface UserDao extends BaseDao <User>{
 
 

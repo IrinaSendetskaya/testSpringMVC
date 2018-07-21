@@ -3,8 +3,6 @@ package by.htp.testSpringMVC.testSpringMVC.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import by.htp.testSpringMVC.testSpringMVC.dao.OrderDao;
 import by.htp.testSpringMVC.testSpringMVC.domain.Order;
 import by.htp.testSpringMVC.testSpringMVC.service.OrderService;

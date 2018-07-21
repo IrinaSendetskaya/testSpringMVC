@@ -2,13 +2,19 @@ package by.htp.testSpringMVC.testSpringMVC.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="Car")
@@ -36,22 +42,15 @@ public class Car implements Serializable{
 	@Column(name="status")
 	private int status;
 	
+	@Fetch(FetchMode.JOIN)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
+	private Set<Order> orders;
+		
+	
 	public Car() {
 	
 	}
-
-	public Car(int id, String brand, String model, BigDecimal price, int i) {
-		super();
-		this.id = id;
-		this.brand = brand;
-		this.model = model;
-		this.price = price;
-		this.status = i;
-	}
-
 	
-
-
 	public Car(int id, String brand, String model, BigDecimal price) {
 		super();
 		this.id = id;
@@ -73,6 +72,16 @@ public class Car implements Serializable{
 		this.brand = brand;
 		this.model = model;
 		this.price = price;
+	}
+	
+	public Car(int id, String brand, String model, BigDecimal price, int status, Set<Order> orders) {
+		super();
+		this.id = id;
+		this.brand = brand;
+		this.model = model;
+		this.price = price;
+		this.status = status;
+		this.orders = orders;
 	}
 
 	public int getId() {
@@ -98,8 +107,6 @@ public class Car implements Serializable{
 	public void setModel(String model) {
 		this.model = model;
 	}
-	
-	
 
 	public BigDecimal getPrice() {
 		return price;
@@ -109,12 +116,22 @@ public class Car implements Serializable{
 		this.price = price;
 	}
 
-	public int isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
 
 	@Override

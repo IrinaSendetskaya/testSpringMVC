@@ -1,9 +1,11 @@
 package by.htp.testSpringMVC.testSpringMVC.web.action;
 
+import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,34 +15,39 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.htp.testSpringMVC.testSpringMVC.dao.hbn.UserDaoHibernateImpl;
+import by.htp.testSpringMVC.testSpringMVC.dao.impl.OrderDaoImpl;
 import by.htp.testSpringMVC.testSpringMVC.domain.User;
 
-//@Controller
-//@RequestMapping(value = "///")    //@RequestMapping(value = "/")
+@Controller  
 public class RegistrationController {
-	
+
 	boolean flag=true;
 	
-//	@Autowired
-//	@Qualifier(value="daoImpl")
-//	private UserDaoHibernateImpl userDaoImpl;   //тут д/б/ ссылки на сервисы!!
+     @Autowired
+     //@Qualifier(value="daoImpl")
+     private UserDaoHibernateImpl userDao;   //тут д/б/ ссылки на сервисы!!
+//     @Autowired
+//     private UserServiceImpl userService;
+     @Autowired
+ 	OrderDaoImpl orderDaoImpl;
 
-//	@RequestMapping(value = "newUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView newUser() {
-		return new ModelAndView("registrationJSP", "userJSP", new User());
+		return new ModelAndView("registration", "userJSP", new User());
 	}
 	
-//	@RequestMapping(value = "checkPass", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkPass", method = RequestMethod.GET)
 	public @ResponseBody
 	String checkPass(@RequestParam String pass) {
+		//включить проверку символов
 		return "Good Password";
 	}
 	
-	//@RequestMapping(value = "checkLogin", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkLogin", method = RequestMethod.GET)
 	public @ResponseBody
 	String checkLogin (@ModelAttribute("userJSP") User user) {
 		
-		 List<User> listUsers= new UserDaoHibernateImpl().readAll();
+		 List<User> listUsers= userDao.readAll();
 		 
 		 for (User userList : listUsers) {
 			 if(userList.getName().equalsIgnoreCase(user.getName())) {
@@ -53,13 +60,35 @@ public class RegistrationController {
 		
 	}
 	
-	//@RequestMapping(value = "signup", method = RequestMethod.GET)
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public @ResponseBody
-	String signup(@ModelAttribute("userJSP") User user) {
+	String signup(@ModelAttribute("userJSP") User user, HttpSession session) {
 		if(flag) {
-		new UserDaoHibernateImpl().create(user);
+		ModelAndView mav=new ModelAndView();
+		
+		userDao.create(user);
+	
+        session.setAttribute("user",user);
+		
+        //лучше переводить на логин
+		mav.setViewName("redirect:/main");
+		mav.addObject("userJSP", user);
+		
 		return "You are successfully registered";
 		}
 		return "You must change login or password!";
+	}
+	
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ModelAndView enterToProgile(Principal principal, HttpSession session) {
+		
+        Object o = session.getAttribute("user");
+        User currentUser;
+        if (o!=null){
+        	currentUser=(User) o;
+        	return new ModelAndView("profile", "userJSP",currentUser);
+        }
+        else
+            return new ModelAndView("login");
 	}
 }

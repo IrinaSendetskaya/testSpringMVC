@@ -30,7 +30,7 @@ public class SpringDataConfig {
 		return dataSource;
 	}
 
-	@Bean
+	@Bean 
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setDataSource(dataSource());

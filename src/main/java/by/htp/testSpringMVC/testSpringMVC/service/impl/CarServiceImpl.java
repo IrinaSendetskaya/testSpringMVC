@@ -3,9 +3,6 @@ package by.htp.testSpringMVC.testSpringMVC.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import by.htp.testSpringMVC.testSpringMVC.dao.CarDao;
 import by.htp.testSpringMVC.testSpringMVC.dao.impl.CarDaoImpl;
 import by.htp.testSpringMVC.testSpringMVC.domain.Car;
 import by.htp.testSpringMVC.testSpringMVC.service.CarService;

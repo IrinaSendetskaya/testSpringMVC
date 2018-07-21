@@ -3,8 +3,6 @@ package by.htp.testSpringMVC.testSpringMVC.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Component;
@@ -12,12 +10,11 @@ import org.springframework.stereotype.Component;
 import by.htp.testSpringMVC.testSpringMVC.dao.OrderDao;
 import by.htp.testSpringMVC.testSpringMVC.domain.Order;
 import by.htp.testSpringMVC.testSpringMVC.repository.OrderRepository;
-import by.htp.testSpringMVC.testSpringMVC.repository.SpringDataConfig;
 
 @Component
 public class OrderDaoImpl implements OrderDao {
 	
-	private static final Logger logger=LogManager.getLogger();
+	//private static final Logger logger=LogManager.getLogger();
 	
 	@Autowired
 	OrderRepository orderRepository;
@@ -43,7 +40,6 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public void update(Order entity) {
 		orderRepository.save(entity);
-		//springDataConfig.entityManagerFactory().nativeEntityManagerFactory.createEntityManager().merge(entity);
 	}
 
 	@Override
@@ -61,6 +57,24 @@ public class OrderDaoImpl implements OrderDao {
 		}
         return listOrder;
 	}
-
+	
+//	@Override
+//	public void insertNewOrder(int userId, int carId) {
+//
+//		Connection conn=DBConnectionHelper.connect();
+//	
+//		try (PreparedStatement ps=conn.prepareStatement(
+//				"INSERT INTO Orders (idUser,idCar) VALUES (?,?)" )) {
+//			
+//			ps.setInt(1, userId);
+//			ps.setInt(2, carId);
+//			
+//			ps.executeUpdate();
+//			logger.error("Error!");
+//			
+//		} catch (SQLException e) {
+//			
+//			e.printStackTrace();
+//		} 
 
 }

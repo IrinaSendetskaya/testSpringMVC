@@ -55,6 +55,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
          = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+            
                 isUser = true;
                 break;
             } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
@@ -64,9 +65,9 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         }
  
         if (isUser) {
-            return "/user";
+            return "/main";
         } else if (isAdmin) {
-            return "/admin";
+            return "/main";
         } else {
             throw new IllegalStateException();
         }

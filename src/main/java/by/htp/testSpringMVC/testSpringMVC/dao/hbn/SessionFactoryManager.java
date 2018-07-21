@@ -21,9 +21,6 @@ public final class SessionFactoryManager {
 					.build();
 			SessionFactory sessionFactory=configuration.buildSessionFactory(serviceRegistry);
 		
-		//SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-		
-		
 			return sessionFactory;
 	}
 	

@@ -1,9 +1,7 @@
 package by.htp.testSpringMVC.testSpringMVC.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,78 +9,66 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import by.htp.testSpringMVC.testSpringMVC.dao.hbn.UserDaoHibernateImpl;
-import by.htp.testSpringMVC.testSpringMVC.dao.impl.CarDaoImpl;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name="Orders")
-public class Order implements Serializable{
+@Table(name = "Orders")
+public class Order implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5731960048387459760L;
-	
+
 	@Id
-	@GeneratedValue (strategy=GenerationType.AUTO)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="idUser")
-	private int idUser;
-	@Column(name="idCar")
-	private int idCar;
-	@Temporal(TemporalType.DATE)
-	@Column(name="dateRent")
-	private Date dateRent;
-	@Temporal(TemporalType.DATE)
-	@Column(name="dateReturn")
-	private Date dateReturn;
-	
-	
+
+//	@Column(name = "idUser")
+//	private int idUser;
+//	@Column(name = "idCar")
+//	private int idCar;
+	// @Temporal(TemporalType.DATE)
+	// @Column(name="dateRent")
+	// private Date dateRent;
+	// @Temporal(TemporalType.DATE)
+	// @Column(name="dateReturn")
+	// private Date dateReturn;
+
 	public Order() {
 		super();
-		
-	}
-	
-	public Order(int id, int idUser, int idCar, Date dateRent, Date dateReturn) {
-		super();
-		this.id = id;
-		this.idUser = idUser;
-		this.idCar = idCar;
-		this.dateRent = dateRent;
-		this.dateReturn = dateReturn;
+
 	}
 
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//	@JoinColumn(name = "idUser", nullable = false)
-//	private User user;
-//	
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//	@JoinColumn(name = "idCar", nullable = false)
-//	private Car car;
-	
-	public int getIdUser() {
-		return idUser;
-	}
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
-	public int getIdCar() {
-		return idCar;
-	}
-	public void setIdCar(int idCar) {
-		this.idCar = idCar;
+	@Fetch(FetchMode.JOIN)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idUser")
+	private User user;
+
+	@Fetch(FetchMode.JOIN)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCar")
+	private Car car;
+
+	public Order(User user, Car car) {
+		super();
+		this.user = user;
+		this.car = car;
 	}
 	
 	
+
+	public Order(int id, User user, Car car) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.car = car;
+	}
 
 	public int getId() {
 		return id;
@@ -92,37 +78,39 @@ public class Order implements Serializable{
 		this.id = id;
 	}
 
-	public Date getDateRent() {
-		return dateRent;
+	public User getUser() {
+		return user;
 	}
 
-	public void setDateRent(Date dateRent) {
-		this.dateRent = dateRent;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Date getDateReturn() {
-		return dateReturn;
+	public Car getCar() {
+		return car;
 	}
 
-	public void setDateReturn(Date dateReturn) {
-		this.dateReturn = dateReturn;
+	public void setCar(Car car) {
+		this.car = car;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [ id=" + id + " user_id=" + idUser+": "+new UserDaoHibernateImpl().read(idUser) + 
-				", car_id=" + idCar + ": "+new CarDaoImpl().read(idCar)+", dateStart= "+dateRent+
-				", dateEnd="+dateReturn+"]";
+		return "Order [ id=" + id + " user:" + user.getName() + ", car:" + car.getBrand()+","+car.getModel() + "]";
 	}
+
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idCar;
-		result = prime * result + idUser;
+		result = prime * result + ((car == null) ? 0 : car.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
+
 
 
 	@Override
@@ -134,14 +122,20 @@ public class Order implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		if (idCar != other.idCar)
+		if (car == null) {
+			if (other.car != null)
+				return false;
+		} else if (!car.equals(other.car))
 			return false;
-		if (idUser != other.idUser)
+		if (id != other.id)
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
-	
-	
-	
 
+	
 }
